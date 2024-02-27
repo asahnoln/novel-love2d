@@ -1,9 +1,9 @@
-local Script = require 'src.Script'
-local Character = require 'src.Character'
-local inputs = require 'src.inputs'
-local elements = require 'src.elements'
-
 describe('script', function()
+  local Script = require 'src.Script'
+  local Character = require 'src.Character'
+  local inputs = require 'src.inputs'
+  local elements = require 'src.elements'
+
   it('has elements', function()
     local s = Script:new()
     local ch = Character:new 'Andy'

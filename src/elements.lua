@@ -1,6 +1,7 @@
 return {
   line = function(character, text)
     return {
+      character = character,
       text = text,
     }
   end,

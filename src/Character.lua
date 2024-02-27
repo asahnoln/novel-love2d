@@ -1,3 +1,5 @@
 return {
-  new = function() end,
+  new = function(self, name)
+    return { name = name }
+  end,
 }
