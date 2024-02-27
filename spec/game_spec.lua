@@ -1,4 +1,5 @@
-local inputs = require 'src.inputs'
+local mock = require 'luassert.mock'
+
 describe('game', function()
   -- FIX: require real love
   local love = {
@@ -9,6 +10,7 @@ describe('game', function()
 
   local Game = require 'src.Game'
   local elements = require 'src.elements'
+  local inputs = require 'src.inputs'
   local Character = require 'src.Character'
 
   it('shows characters line', function()
