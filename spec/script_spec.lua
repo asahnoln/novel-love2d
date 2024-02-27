@@ -11,7 +11,7 @@ describe('script', function()
 
     s:add(wantLine)
     assert.is_not_nil(s:part(1))
-    assert.are_equal(s:part(1), wantLine)
+    assert.are_equal(wantLine, s:part(1))
   end)
 
   it('should differ from other script', function()
@@ -39,7 +39,27 @@ describe('script', function()
 
     s:input(ch)
 
-    assert.are_equal(s:part(1), wantLine)
-    assert.are_equal(s:part(2), elements.skippedLine)
+    assert.are_equal(wantLine, s:part(1))
+    assert.are_equal(elements.skippedLine, s:part(2))
+  end)
+
+  it('presents choices for the player', function()
+    local s = Script:new()
+
+    local chs = { inputs.choice '1', inputs.choice '2' }
+    local choicesEl = elements.choices(chs)
+    s:add(choicesEl)
+
+    assert.are_equal(chs, s:part(1))
+  end)
+
+  it('should return end if out of bounds', function()
+    local s = Script:new()
+
+    s:add { "shouldn't be called" }
+
+    assert.are_equal(elements.theEnd, s:part(2))
+    assert.are_equal(elements.theEnd, s:part(0))
+    assert.are_equal(elements.theEnd, s:part(-1))
   end)
 end)
