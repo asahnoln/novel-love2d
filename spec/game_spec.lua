@@ -1,3 +1,4 @@
+local inputs = require 'src.inputs'
 describe('game', function()
   -- FIX: require real love
   local love = {
@@ -20,5 +21,15 @@ describe('game', function()
     -- TODO: Clean before print
     assert.stub(love.graphics.print).was.called_with('Troy', 1, 1)
     assert.stub(love.graphics.print).was.called_with('Hello hello', 10, 10)
+  end)
+
+  it('shows choices', function()
+    mock(love, true)
+    local g = Game:new(love)
+
+    g:showElement(love, elements.choices { inputs.choice 'a', inputs.choice 'b' })
+
+    -- TODO: Clean before print
+    assert.stub(love.graphics.print).was.called_with('a', 1, 30)
   end)
 end)
