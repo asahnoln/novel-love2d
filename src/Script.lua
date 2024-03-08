@@ -1,34 +1,29 @@
 local elements = require 'src.elements'
-return {
-  new = function()
-    local els = {}
-    local choices = {}
-    return {
-      add = function(self, el)
-        table.insert(els, el)
-      end,
+local class = require 'src.class'
 
-      part = function(self, p)
-        if p < 1 or p > #els then
-          return elements.theEnd
-        end
+local Script = {}
 
-        if els[p].choice then
-          for i = 1, #choices do
-            if choices[i] == els[p].choice then
-              return els[p].element
-            else
-              return elements.skippedLine
-            end
-          end
-        end
+function Script:new()
+  return class.new(self, {
+    els = {},
+    choices = {},
+  })
+end
 
-        return els[p]
-      end,
+function Script:add(el)
+  table.insert(self.els, el)
+end
 
-      input = function(self, ch)
-        table.insert(choices, ch)
-      end,
-    }
-  end,
-}
+function Script:input(ch)
+  table.insert(self.choices, ch)
+end
+
+function Script:part(p)
+  if p < 1 or p > #self.els then
+    return elements.theEnd
+  end
+
+  return elements.resolve(self.els[p], self.choices)
+end
+
+return Script

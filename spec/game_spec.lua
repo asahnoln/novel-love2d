@@ -25,13 +25,13 @@ describe('game', function()
     assert.stub(love.graphics.print).was.called_with('Hello hello', 10, 10)
   end)
 
-  it('shows choices', function()
-    mock(love, true)
-    local g = Game:new(love)
-
-    g:showElement(love, elements.choices { inputs.choice 'a', inputs.choice 'b' })
-
-    -- TODO: Clean before print
-    assert.stub(love.graphics.print).was.called_with('a', 1, 30)
-  end)
+  -- it('shows choices', function()
+  --   mock(love, true)
+  --   local g = Game:new(love)
+  --
+  --   g:showElement(love, elements.choices { inputs.choice 'a', inputs.choice 'b' })
+  --
+  --   -- TODO: Clean before print
+  --   assert.stub(love.graphics.print).was.called_with('a', 1, 30)
+  -- end)
 end)

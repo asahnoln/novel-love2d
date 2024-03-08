@@ -1,3 +1,5 @@
+local skippedLine = { 'skippedLine' }
+
 return {
   line = function(character, text)
     return {
@@ -14,11 +16,25 @@ return {
     }
   end,
 
-  skippedLine = { 'skippedLine' },
+  skippedLine = skippedLine,
 
   choices = function(chs)
     return chs
   end,
 
   theEnd = { 'theEnd' },
+
+  resolve = function(el, choices)
+    if el.choice then
+      for i = 1, #choices do
+        if el.choice == choices[i] then
+          return el.element
+        end
+
+        return skippedLine
+      end
+    end
+
+    return el
+  end,
 }
